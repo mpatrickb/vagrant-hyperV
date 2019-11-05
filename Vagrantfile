@@ -13,7 +13,7 @@ Vagrant.configure("2") do |config|
   
   #config.vm.synced_folder ".", "/vagrant", disabled: false
   config.vm.synced_folder "site", "/vagrant", type: "smb",
-    
+    smb_password: "", smb_username: "",
 	mount_options: ['vers=3.0']
 	
   #config.vm.synced_folder ".", "/vagrant", mount_options: ['dmode=774','fmode=775']
