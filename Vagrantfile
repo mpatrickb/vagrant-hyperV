@@ -10,11 +10,13 @@ Vagrant.configure("2") do |config|
 	v.enable_virtualization_extensions = true
   end
   # config.vm.network "DockerNAT"
-  
+
+  config.vm.synced_folder "site", "/vagrant", type: "sshfs", sshfs_opts_append: "-o nonempty -o cache=no"
+
   #config.vm.synced_folder ".", "/vagrant", disabled: false
-  config.vm.synced_folder "site", "/vagrant", type: "smb",
-    smb_password: "", smb_username: "",
-	mount_options: ['vers=3.0']
+  #config.vm.synced_folder "site", "/vagrant", type: "smb",
+  #  smb_password: "", smb_username: "",
+  #   mount_options: ['vers=3.0']
 	
   #config.vm.synced_folder ".", "/vagrant", mount_options: ['dmode=774','fmode=775']
 	
