@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
-cd /vagrant/
-php bin/console server:start
-php bin/console cache:clear --env=dev
+#cd /var/www/
+#php bin/console server:start
+#php bin/console cache:clear --env=dev
 #php bin/console cache:clear --env=prod
 
-#https://knpuniversity.com/screencast/symfony3/json-api#play
+ip4=$(/sbin/ip -o -4 addr list eth0 | awk '{print $4}' | cut -d/ -f1)
+echo $ip4 >> /vagrant/ipaddress

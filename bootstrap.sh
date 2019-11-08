@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 apt-get update
+apt-get upgrade -y
 
 # unzip is for composer
 apt-get install vim unzip  -y
@@ -14,7 +15,7 @@ apt-get install php7.2-dom php7.2-xml php7.2-soap -y
 apt-get install --reinstall ca-certificates -y
 
 # install the php xdebug extension (only for dev servers!)
-apt-get install php-xdebug -y
+#apt-get install php-xdebug -y
 
 # add xdebug settings to php.ini
 echo 'xdebug.remote_port=9000' >> /etc/php/7.2/apache2/php.ini
@@ -32,35 +33,46 @@ a2enmod actions
 # Change AllowOverride from None to All (between line 170 and 174)
 sed -i '170,174 s/AllowOverride None/AllowOverride All/g' /etc/apache2/apache2.conf
 
+
+
+# ---------------------------------------
+#          MySQL Setup
+# ---------------------------------------
+
+# Setting MySQL root user password root/root
+debconf-set-selections <<< 'mysql-server mysql-server/root_password password vagrant'
+debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password vagrant'
+
+
+# Installing packages
+apt-get install mysql-server -y
+
+# Allow External Connections on your MySQL Service
+sudo sed -i -e 's/bind-addres/#bind-address/g' /etc/mysql/mysql.conf.d/mysqld.cnf
+sudo sed -i -e 's/skip-external-locking/#skip-external-locking/g' /etc/mysql/mysql.conf.d/mysqld.cnf
+mysql -u root -proot -e "GRANT ALL PRIVILEGES ON *.* TO 'vagrant'@'%' IDENTIFIED BY 'vagrant'; FLUSH privileges;"
+sudo service mysql restart
+# create client database
+# mysql -u root -proot -e "CREATE DATABASE myDB;"
+
+
 # ---------------------------------------
 #          PHPMyAdmin setup
 # ---------------------------------------
 
-# Install PHPMyAdmin
-#apt-get install -y phpmyadmin
-
 # Default PHPMyAdmin Settings
-#debconf-set-selections <<< 'phpmyadmin phpmyadmin/dbconfig-install boolean true'
-#-set-selections <<< 'phpmyadmin phpmyadmin/app-password-confirm password root'
-#debconf-set-selections <<< 'phpmyadmin phpmyadmin/mysql/admin-pass password root'
-#debconf-set-selections <<< 'phpmyadmin phpmyadmin/mysql/app-pass password root'
-#debconf-set-selections <<< 'phpmyadmin phpmyadmin/reconfigure-webserver multiselect apache2'
+debconf-set-selections <<< 'phpmyadmin phpmyadmin/dbconfig-install boolean true'
+debconf-set-selections <<< 'phpmyadmin phpmyadmin/app-password-confirm password vagrant'
+debconf-set-selections <<< 'phpmyadmin phpmyadmin/mysql/admin-pass password vagrant'
+debconf-set-selections <<< 'phpmyadmin phpmyadmin/mysql/app-pass password vagrant'
+debconf-set-selections <<< 'phpmyadmin phpmyadmin/reconfigure-webserver multiselect apache2'
 
-
+# Install PHPMyAdmin
+apt-get install -y phpmyadmin
 
 
 # Start the webserver
 service apache2 restart
-
-# Install MySQL (optional)
-#apt-get install mysql-server -y
-
-# Change mysql root password
-#service mysql start
-#mysql -u root --password="" -e "update mysql.user set authentication_string=password(''), plugin='mysql_native_password' where user='root';"
-#mysql -u root --password="" -e "flush privileges;"
-
-
 
 
 # Install composer
@@ -71,14 +83,16 @@ php -r "unlink('composer-setup.php');"
 composer self-update
 
 # Installing GIT
-apt-get install -y git
+apt-get install git -y
+
+
+# Symfony
+cd ~
+wget https://get.symfony.com/cli/installer -O - | bash
+mv /root/.symfony/bin/symfony /usr/local/bin/symfony
 
 
 # Create a symlink
-rm -rf /var/www
-mkdir /var/www
-ln -s /vagrant/public /var/www/html
-
-# Symfony
-wget https://get.symfony.com/cli/installer -O - | bash
-mv /home/vagrant/.symfony/bin/symfony /usr/local/bin/symfony
+#rm -rf /var/www
+#mkdir /var/www
+#ln -s /vagrant/public /var/www/html
