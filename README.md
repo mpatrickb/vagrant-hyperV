@@ -16,8 +16,8 @@ Default username and password:
 ```Shell
 git clone https://github.com/mpatrickb/vagrant-hyperV.git
 vagrant up
-vagrant ssh
 ```
+
 
 ### Userfull
 - IP is always saved here > ```/vagrant/ipaddress```
@@ -28,8 +28,15 @@ vagrant ssh
 
 ---
 
+## Setup Vagrant
+1) [Download](https://www.vagrantup.com/downloads.html) and install 
+2) Open powershell
+```PowerShell
+vagrant plugin install vagrant-sshfs
+```
+
 ## Setup Hyper-V
-### Enable Hyper-V
+
 1) Open powershell (as admin)
 ```PowerShell
 Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All

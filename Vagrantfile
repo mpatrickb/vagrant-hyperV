@@ -21,7 +21,7 @@ Vagrant.configure("2") do |config|
 
   # config.vm.network "DockerNAT"
 
-  config.vm.synced_folder "site", "/vagrant", type: "sshfs", sshfs_opts_append: "-o nonempty -o cache=no"
+  config.vm.synced_folder "vagrant", "/vagrant", type: "sshfs", sshfs_opts_append: "-o nonempty -o cache=no"
 
   # config.vm.synced_folder "site", "/vagrant", type: "smb",
   #  smb_password: "", smb_username: "",
