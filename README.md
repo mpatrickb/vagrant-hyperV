@@ -1,6 +1,6 @@
 # vagrant-hyperV
 
-Get started with Vagrant and the Hyper-V provider. This build contains the following package:
+This build contains the following package:
 - Ubuntu
 - php7.2
 - mysql
