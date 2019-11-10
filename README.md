@@ -14,7 +14,7 @@ Default username and password:
 
 ## Usage
 ```Shell
-git clone https://github.com/mpatrickb/vagrant-hyperV.git
+git clone https://github.com/mpatrickb/vagrant-hyperV.git ./
 vagrant up
 ```
 
