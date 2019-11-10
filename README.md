@@ -35,11 +35,14 @@ vagrant up
 vagrant plugin install vagrant-sshfs
 ```
 
-## Setup Hyper-V
+## Setup Hyper-V and OpenSSH-server
 
 1) Open powershell (as admin)
 ```PowerShell
 Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
+Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0
+Start-Service sshd
+Set-Service -Name sshd -StartupType 'Automatic'
 ```
 > *don't reboot yet*
 
@@ -54,3 +57,9 @@ Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
 2) Select 'Virtual Switch Manager'
 3) New virtual networkswitch
 4) Give it a name and select the right external network adapter
+
+### Errors
+- Sftp error; Please run in powershell (as admin)
+```PowerShell
+New-NetFirewallRule -Name sshd -DisplayName 'OpenSSH Server (sshd)' -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort 22
+```
