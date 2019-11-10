@@ -50,7 +50,7 @@ apt-get install mysql-server -y
 # Allow External Connections on your MySQL Service
 sudo sed -i -e 's/bind-addres/#bind-address/g' /etc/mysql/mysql.conf.d/mysqld.cnf
 sudo sed -i -e 's/skip-external-locking/#skip-external-locking/g' /etc/mysql/mysql.conf.d/mysqld.cnf
-mysql -u root -proot -e "use mysql; update user set user='vagrant' where user='root'; GRANT ALL PRIVILEGES ON *.* TO 'vagrant'@'%' IDENTIFIED BY 'vagrant'; FLUSH privileges;"
+mysql -u root -pvagrant -e "use mysql; update user set user='vagrant' where user='root'; GRANT ALL PRIVILEGES ON *.* TO 'vagrant'@'%' IDENTIFIED BY 'vagrant'; FLUSH privileges;"
 # mysql -u root -proot -e "GRANT ALL PRIVILEGES ON *.* TO 'vagrant'@'%' IDENTIFIED BY 'vagrant'; FLUSH privileges;"
 sudo service mysql restart
 # create client database
