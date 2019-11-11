@@ -2,12 +2,12 @@
 
 This build contains the following package:
 - Ubuntu
-- php7.2
-- mysql
-- phpmyadmin
-- composer
-- git
-- symfony
+- PHP 7.2 (default) / 7.3 / 7.4
+- MySql
+- PhpMyadmin
+- Composer
+- Git
+- Symfony
 
 Default username and password:
 **vagrant / vagrant**
@@ -20,6 +20,7 @@ vagrant up
 
 
 ### Userfull
+- If you want to use another PHP version, edit 'bootalways.sh' before 'vagrant up' 
 - IP is always saved here > ```/vagrant/ipaddress```
 - Apache2 uses the following location: ```\var\www\html\```
 - Use SFTP in phpstorm. Root path: ```/var/www``` or ```/var/www/html```
