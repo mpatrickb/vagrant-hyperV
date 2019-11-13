@@ -1,8 +1,6 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 Vagrant.configure("2") do |config|
-  config.vm.box = "hashicorp/bionic64"
-  config.vm.box_version = "1.0.282"
   
   config.vm.provider "hyperv" do |v, override|
     v.maxmemory = 3048
@@ -11,6 +9,14 @@ Vagrant.configure("2") do |config|
 	v.enable_virtualization_extensions = true
   end
 
+    config.vm.box = "hashicorp/bionic64"
+    config.vm.box_version = "1.0.282"
+
+    # config.vm.box = "bento/ubuntu-18.04"
+    # config.vm.box = "centos/7"
+    # config.vm.box = "laravel/homestead"
+
+    config.vm.network "public_network"
     config.ssh.forward_agent = true
     config.ssh.insert_key = false
 
