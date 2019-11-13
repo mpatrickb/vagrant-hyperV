@@ -21,5 +21,12 @@ a2dismod php7.*; a2enmod php7.3; service apache2 restart
 #php bin/console cache:clear --env=dev
 #php bin/console cache:clear --env=prod
 
+# ----------
+# Don't change below this line
+# ----------
+rm -rf /vagrant/ip_*
 ip4=$(/sbin/ip -o -4 addr list eth0 | awk '{print $4}' | cut -d/ -f1)
-echo $ip4 >> /vagrant/ipaddress
+echo $ip4 >> /vagrant/ip_$ip4
+echo -----------
+echo IP: $ip4
+echo -----------

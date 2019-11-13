@@ -59,6 +59,8 @@ a2enmod actions
 # Change AllowOverride from None to All (between line 170 and 174)
 sed -i '170,174 s/AllowOverride None/AllowOverride All/g' /etc/apache2/apache2.conf
 
+rm /var/www/html/index.html
+echo "<?php phpinfo(); ?>" >> /var/www/html/index.php
 
 # ---------------------------------------
 #          MySQL Setup
