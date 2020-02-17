@@ -19,6 +19,7 @@ apt-get install php7.2-dom php7.2-xml php7.2-soap -y
 # PHP 7.3
 apt-get install php7.3 -y
 apt-get install php-pear php7.3-curl php7.3-dev php7.3-gd php7.3-mbstring php7.3-zip php7.3-mysql php7.3-xml -y
+apt-get install php7.3-bcmath php7.3-intl php7.3-ldap -y
 
 # PHP 7.4
 apt-get install php7.4 -y
@@ -100,6 +101,9 @@ apt-get install -y phpmyadmin
 
 
 # Start the webserver
+sudo adduser vagrant www-data
+chown -R www-data:www-data /var/www/html/
+chmod -R g+rw /var/www/html/
 service apache2 restart
 
 

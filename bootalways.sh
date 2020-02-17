@@ -9,7 +9,7 @@
 # unmark the version you want
 # ----------
 # a2dismod php7.*; a2enmod php7.2; service apache2 restart
-a2dismod php7.*; a2enmod php7.3; service apache2 restart
+# a2dismod php7.*; a2enmod php7.3; service apache2 restart
 # a2dismod php7.*; a2enmod php7.4; service apache2 restart
 
 
