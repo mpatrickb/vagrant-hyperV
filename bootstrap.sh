@@ -123,6 +123,10 @@ cd ~
 wget https://get.symfony.com/cli/installer -O - | bash
 mv /root/.symfony/bin/symfony /usr/local/bin/symfony
 
+#FTP
+apt-get -y install vsftpd
+echo 'write_enable=YES' >> /etc/vsftpd.conf
+service vsftpd restart
 
 # Create a symlink
 #rm -rf /var/www
